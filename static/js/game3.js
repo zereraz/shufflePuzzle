@@ -38,6 +38,7 @@ window.onload = function(){
     }
     var play = function(game){
          this.mainGame = [];
+         this.distance = 500/3;
     };    
     play.prototype = {        
         create:function(){
@@ -76,78 +77,104 @@ window.onload = function(){
             switch(sprite.z){
                 case 1:
                     if(this.mainGame[sprite.z]===0){
-                        console.log("Move right");
+                        this.move(sprite, "r");
                     }else if(this.mainGame[sprite.z+2]===0){
-                        console.log("Move down");
+                        this.move(sprite, "d");
                     }
                     break;
                 case 2:
                     if(this.mainGame[sprite.z-1]===0){
-                        console.log("Move left");
+                        this.move(sprite, "l");
                     }else if(this.mainGame[sprite.z]===0){
-                        console.log("Move right");
+                        this.move(sprite, "r");
                     }else if(this.mainGame[sprite.z+2]===0){
-                        console.log("Move down")
+                        this.move(sprite, "d")
                     }
                     break;
                 case 3:
                     if(this.mainGame[sprite.z-1]===0){
-                        console.log("Move left");
+                        this.move(sprite, "l");
                     }else if(this.mainGame[sprite.z+2]===0){
-                        console.log("Move down");
+                        this.move(sprite, "d");
                     }
                     break;
                 case 4:
                     if(this.mainGame[sprite.z]===0){
-                        console.log("Move right");
+                        this.move(sprite, "r");
                     }else if(this.mainGame[sprite.z+2]===0){
-                        console.log("Move down");
+                        this.move(sprite, "d");
                     }
                     else if(this.mainGame[sprite.z-2]===0){
-                        console.log("Move up");
+                        this.move(sprite, "u");
                     }
                     break;
                 case 5:
                     if(this.mainGame[sprite.z]===0){
-                        console.log("Move right");
+                        this.move(sprite, "r");
                     }else if(this.mainGame[sprite.z-1]===0){
-                        console.log("Move left");
+                        this.move(sprite, "l");
                     }else if(this.mainGame[sprite.z+2]===0){
-                        console.log("Move down");
+                        this.move(sprite, "d");
                     }
                     else if(this.mainGame[sprite.z-2]===0){
-                        console.log("Move up");
+                        this.move(sprite, "u");
                     }
                     break;
                 case 6:                
                     if(this.mainGame[sprite.z-1]===0){
-                        console.log("Move left");
+                        this.move(sprite, "l");
                     }else if(this.mainGame[sprite.z+2]===0){
-                        console.log("Move down");
+                        this.move(sprite, "d");
                     }
                     else if(this.mainGame[sprite.z-2]===0){
-                        console.log("Move up");
+                        this.move(sprite, "u");
                     }
                     break;
                 case 7:
                     if(this.mainGame[sprite.z]===0){
-                        console.log("Move right");
+                        this.move(sprite, "r");
                     }else if(this.mainGame[sprite.z-2]===0){
-                        console.log("Move up");
+                        this.move(sprite, "u");
                     }
                     break;
                 case 8:
                     if(this.mainGame[sprite.z-1]===0){
-                        console.log("Move left");
+                        this.move(sprite, "l");
                     }else if(this.mainGame[sprite.z]===0){
-                        console.log("Move right");
+                        this.move(sprite, "r");
                     }else if(this.mainGame[sprite.z-2]===0){
-                        console.log("Move up")
+                        this.move(sprite, "u");
                     }
                     break;
 
             }
 
+        },
+        move: function(sprite, dir){
+            console.log(this.mainGame);
+            console.log("moving "+dir)
+            switch(dir){
+                case "r":
+                    sprite.x+=this.distance;
+                    this.mainGame[sprite.z] = sprite;
+                    this.mainGame[sprite.z-1] = 0;
+                    break;
+                case "l":
+                    sprite.x-=this.distance;
+                    this.mainGame[sprite.z] = 0;
+                    this.mainGame[sprite.z-1] = sprite;
+                    break;
+                case "u":
+                    sprite.y-=this.distance;
+                    this.mainGame[sprite.z+2] = 0;
+                    this.mainGame[sprite.z-2] = sprite;
+                    break;
+                case "d":
+                    sprite.y+=this.distance;
+                    this.mainGame[sprite.z] = 0;
+                    this.mainGame[sprite.z+3] = sprite;
+                    break;
+            }
         }
     }
     var gameover = function(game){
