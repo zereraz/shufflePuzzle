@@ -22,8 +22,7 @@ window.onload = function(){
             game.load.image('8', 'img/juspay-9.png');
             game.stage.backgroundColor = "222222";
         },
-        create: function(){
-            
+        create: function(){            
             this.title = game.add.sprite(0,0,'title'); 
             this.title.scale.set(3.2,3.2);
             //this.title.anchor.setTo(0.5,0.5);
@@ -45,7 +44,7 @@ window.onload = function(){
                                 
             
             game.stage.backgroundColor = "222";
-            this.shuffle();
+            this.shuffle();            
             //if the browser tab loses focus game will not pause
             game.stage.disableVisibilityChange = true;
             game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -64,10 +63,92 @@ window.onload = function(){
                     j+=1;                    
                 }
                 this.mainGame.push(game.add.sprite(i%3*500/3,j*500/3,String(i)));
-                this.mainGame[i].scale.set(3.2,3.2);              
+                this.mainGame[i].scale.set(3.2,3.2);
+                this.mainGame[i].id = i;
+                this.mainGame[i].inputEnabled = true;
+                //this.mainGame[i].enableDrag(true);
+                this.mainGame[i].enableBody = true;
+                this.mainGame[i].events.onInputDown.add(this.clicked, this);
             }
             this.mainGame[8] = 0;
         },
+        clicked: function(sprite){
+            switch(sprite.z){
+                case 1:
+                    if(this.mainGame[sprite.z]===0){
+                        console.log("Move right");
+                    }else if(this.mainGame[sprite.z+2]===0){
+                        console.log("Move down");
+                    }
+                    break;
+                case 2:
+                    if(this.mainGame[sprite.z-1]===0){
+                        console.log("Move left");
+                    }else if(this.mainGame[sprite.z]===0){
+                        console.log("Move right");
+                    }else if(this.mainGame[sprite.z+2]===0){
+                        console.log("Move down")
+                    }
+                    break;
+                case 3:
+                    if(this.mainGame[sprite.z-1]===0){
+                        console.log("Move left");
+                    }else if(this.mainGame[sprite.z+2]===0){
+                        console.log("Move down");
+                    }
+                    break;
+                case 4:
+                    if(this.mainGame[sprite.z]===0){
+                        console.log("Move right");
+                    }else if(this.mainGame[sprite.z+2]===0){
+                        console.log("Move down");
+                    }
+                    else if(this.mainGame[sprite.z-2]===0){
+                        console.log("Move up");
+                    }
+                    break;
+                case 5:
+                    if(this.mainGame[sprite.z]===0){
+                        console.log("Move right");
+                    }else if(this.mainGame[sprite.z-1]===0){
+                        console.log("Move left");
+                    }else if(this.mainGame[sprite.z+2]===0){
+                        console.log("Move down");
+                    }
+                    else if(this.mainGame[sprite.z-2]===0){
+                        console.log("Move up");
+                    }
+                    break;
+                case 6:                
+                    if(this.mainGame[sprite.z-1]===0){
+                        console.log("Move left");
+                    }else if(this.mainGame[sprite.z+2]===0){
+                        console.log("Move down");
+                    }
+                    else if(this.mainGame[sprite.z-2]===0){
+                        console.log("Move up");
+                    }
+                    break;
+                case 7:
+                    if(this.mainGame[sprite.z]===0){
+                        console.log("Move right");
+                    }else if(this.mainGame[sprite.z-2]===0){
+                        console.log("Move up");
+                    }
+                    break;
+                case 8:
+                    if(this.mainGame[sprite.z-1]===0){
+                        console.log("Move left");
+                    }else if(this.mainGame[sprite.z]===0){
+                        console.log("Move right");
+                    }else if(this.mainGame[sprite.z-2]===0){
+                        console.log("Move up")
+                    }
+                    break;
+
+            }
+
+        }
     }
     var gameover = function(game){
 
