@@ -24,10 +24,10 @@ window.onload = function(){
         },
         create: function(){
             
-            this.title = game.add.sprite(0,0,'title');
-            
-            this.title.anchor.setTo(0.5,0.5);
+            this.title = game.add.sprite(0,0,'title'); 
             this.title.scale.set(3.2,3.2);
+            //this.title.anchor.setTo(0.5,0.5);
+            
             game.input.onDown.addOnce(this.changeState,this);
         },
         update: function(){
