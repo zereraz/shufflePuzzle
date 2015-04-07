@@ -11,15 +11,15 @@ window.onload = function(){
 
         preload: function(){            
             game.load.image('title', 'img/juspay.jpg');
-            game.load.image('0', 'img/juspay-1.png');
-            game.load.image('1', 'img/juspay-2.png');
-            game.load.image('2', 'img/juspay-3.png');
+            game.load.image('0', 'img/juspay-6.png');
+            game.load.image('1', 'img/juspay-8.png');
+            game.load.image('2', 'img/juspay-9.png');
             game.load.image('3', 'img/juspay-4.png');
             game.load.image('4', 'img/juspay-5.png');
-            game.load.image('5', 'img/juspay-6.png');
+            game.load.image('5', 'img/juspay-1.png');
             game.load.image('6', 'img/juspay-7.png');
-            game.load.image('7', 'img/juspay-8.png');
-            game.load.image('8', 'img/juspay-9.png');
+            game.load.image('7', 'img/juspay-2.png');
+            game.load.image('8', 'img/juspay-3.png');
             game.stage.backgroundColor = "222222";
         },
         create: function(){            
