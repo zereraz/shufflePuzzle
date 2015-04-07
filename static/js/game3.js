@@ -74,92 +74,21 @@ window.onload = function(){
             this.mainGame[8] = 0;
         },
         clicked: function(sprite){
-            console.log(this.mainGame);            
-            switch(sprite.z){                
-                case 0:
-                    if(this.mainGame[sprite.z+1]===0){
-                        this.move(sprite, "r");
-                    }else if(this.mainGame[sprite.z+3]===0){
-                        this.move(sprite, "d");
-                    }
-                    break;
-                case 1:
-                    if(this.mainGame[sprite.z-1]===0){
-                        this.move(sprite, "l");
-                    }else if(this.mainGame[sprite.z+1]===0){
-                        this.move(sprite, "r");
-                    }else if(this.mainGame[sprite.z+3]===0){
-                        this.move(sprite, "d")
-                    }
-                    break;
-                case 2:
-                    if(this.mainGame[sprite.z-1]===0){
-                        this.move(sprite, "l");
-                    }else if(this.mainGame[sprite.z+3]===0){
-                        this.move(sprite, "d");
-                    }
-                    break;
-                case 3:
-                    if(this.mainGame[sprite.z+1]===0){
-                        this.move(sprite, "r");
-                    }else if(this.mainGame[sprite.z+3]===0){
-                        this.move(sprite, "d");
-                    }
-                    else if(this.mainGame[sprite.z-3]===0){
-                        this.move(sprite, "u");
-                    }
-                    break;
-                case 4:
-                    if(this.mainGame[sprite.z+1]===0){
-                        this.move(sprite, "r");
-                    }else if(this.mainGame[sprite.z-1]===0){
-                        this.move(sprite, "l");
-                    }else if(this.mainGame[sprite.z+3]===0){
-                        this.move(sprite, "d");
-                    }
-                    else if(this.mainGame[sprite.z-3]===0){
-                        this.move(sprite, "u");
-                    }
-                    break;
-                case 5:                
-                    if(this.mainGame[sprite.z-1]===0){
-                        this.move(sprite, "l");
-                    }else if(this.mainGame[sprite.z+3]===0){
-                        this.move(sprite, "d");
-                    }
-                    else if(this.mainGame[sprite.z-3]===0){
-                        this.move(sprite, "u");
-                    }
-                    break;
-                case 6:
-                    if(this.mainGame[sprite.z+1]===0){
-                        this.move(sprite, "r");
-                    }else if(this.mainGame[sprite.z-3]===0){
-                        this.move(sprite, "u");
-                    }
-                    break;
-                case 7:                
-                    if(this.mainGame[sprite.z-1]===0){                        
-                        this.move(sprite, "l");
-                    }else if(this.mainGame[sprite.z+1]===0){
-                        this.move(sprite, "r");
-                    }else if(this.mainGame[sprite.z-3]===0){
-                        this.move(sprite, "u");
-                    }
-                    break;
-                case 8:
-                    if(this.mainGame[sprite.z-1]===0){                        
-                        this.move(sprite, "l");
-                    }else if(this.mainGame[sprite.z+1]===0){
-                        this.move(sprite, "r");
-                    }else if(this.mainGame[sprite.z-3]===0){
-                        this.move(sprite, "u");
-                    }
-            }
-
+                this.possibleMove(sprite);
         },
-        move: function(sprite, dir){
-            console.log(this.mainGame);
+        possibleMove: function(sprite){
+            if(this.mainGame[sprite.z+1]===0){
+                this.move(sprite, "r");
+            }else if(this.mainGame[sprite.z-1]===0){
+                this.move(sprite, "l");
+            }else if(this.mainGame[sprite.z+3]===0){
+                this.move(sprite, "d");
+            }
+            else if(this.mainGame[sprite.z-3]===0){
+                this.move(sprite, "u");
+            }
+        },
+        move: function(sprite, dir){            
             switch(dir){
                 case "r":
                     sprite.x+=this.distance;
