@@ -11,15 +11,14 @@ window.onload = function(){
 
         preload: function(){            
             game.load.image('title', 'img/juspay.jpg');
-            game.load.image('0', 'img/juspay-6.png');
-            game.load.image('1', 'img/juspay-1.png');
+            game.load.image('5', 'img/juspay-1.png');
+            game.load.image('0', 'img/juspay-2.png');
             game.load.image('2', 'img/juspay-3.png');
-            game.load.image('3', 'img/juspay-2.png');
-            game.load.image('4', 'img/juspay-8.png');
-            game.load.image('5', 'img/juspay-5.png');
-            game.load.image('6', 'img/juspay-4.png');
-            game.load.image('7', 'img/juspay-7.png');
-            //game.load.image('8', 'img/juspay-9.png');
+            game.load.image('1', 'img/juspay-4.png');
+            game.load.image('7', 'img/juspay-5.png');
+            game.load.image('4', 'img/juspay-6.png');
+            game.load.image('3', 'img/juspay-7.png');
+            game.load.image('6', 'img/juspay-8.png');
             game.stage.backgroundColor = "222222";
         },
         create: function(){            
@@ -39,11 +38,11 @@ window.onload = function(){
     var play = function(game){
          this.mainGame = [];
          this.distance = 500/3;
+         this.steps = 0;
+         this.success = ['5','0','2','1','7','4','3','6'];
     };    
     play.prototype = {        
         create:function(){
-                                
-            
             game.stage.backgroundColor = "222";
             this.shuffle();            
             //if the browser tab loses focus game will not pause
@@ -61,11 +60,10 @@ window.onload = function(){
             var j = -1;
             for(var i = 0; i<8 ; i++){
                 if(i%3==0){
-                    j+=1;                    
-                }
+                    j+=1;
+                }                
                 this.mainGame.push(game.add.sprite(i%3*500/3,j*500/3,String(i)));
-                this.mainGame[i].scale.set(3.2,3.2);
-                this.mainGame[i].id = i;
+                this.mainGame[i].scale.set(3.2,3.2);              
                 this.mainGame[i].inputEnabled = true;
                 this.mainGame[i].enableBody = true;
                 this.mainGame[i].events.onInputDown.add(this.clicked, this);
@@ -74,7 +72,7 @@ window.onload = function(){
             this.mainGame[8] = 0;
         },
         clicked: function(sprite){
-                console.log(sprite.z+1);
+                console.log(sprite.key);
                 this.possibleMove(sprite);
         },
         possibleMove: function(sprite){
@@ -89,7 +87,8 @@ window.onload = function(){
                 this.move(sprite, "u");
             }
         },
-        move: function(sprite, dir){            
+        move: function(sprite, dir){
+            this.steps += 1;         
             switch(dir){
                 case "r":
                     sprite.x+=this.distance;
@@ -116,6 +115,19 @@ window.onload = function(){
                     sprite.z = sprite.z+3;
                     break;
             }
+            if(this.checkStatus()){
+                alert("Congrats you finished the game in "+this.steps);
+            }              
+        },
+        checkStatus: function(){
+
+            for(var i = 0; i < this.mainGame.length; i++){
+                if(this.mainGame[i].key !== this.success[i]){                    
+                    return false;
+                }        
+            }
+            return true;
+
         }
     }
     var gameover = function(game){
